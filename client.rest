@@ -1,0 +1,31 @@
+@baseUrl = http://localhost:3000
+
+######## USUÁRIOS
+
+### Obter todos os usuários
+GET {{baseUrl}}/users
+
+### Obter um usuário por ID
+GET {{baseUrl}}/users/2
+
+### Criar um novo usuário
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+    "name": "John Doe Silva",
+    "email": "john.doe2@example.com",
+    "password": "securepassword"
+}
+
+### Atualizar um usuário por ID
+PATCH {{baseUrl}}/users/2
+Content-Type: application/json
+
+{
+    "name": "John Updated",
+    "email": "john.updated@example.com"
+}
+
+### Deletar um usuário por ID
+DELETE {{baseUrl}}/users/2
