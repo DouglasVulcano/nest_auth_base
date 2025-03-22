@@ -6,7 +6,7 @@
 GET {{baseUrl}}/users
 
 ### Obter um usuário por ID
-GET {{baseUrl}}/users/2
+GET {{baseUrl}}/users/3
 
 ### Criar um novo usuário
 POST {{baseUrl}}/users
@@ -19,13 +19,13 @@ Content-Type: application/json
 }
 
 ### Atualizar um usuário por ID
-PATCH {{baseUrl}}/users/2
+PATCH {{baseUrl}}/users/3
 Content-Type: application/json
 
 {
-    "name": "John Updated",
-    "email": "john.updated@example.com"
+    "name": "John Update",
+    "password": "john.updated2@example.com"
 }
 
 ### Deletar um usuário por ID
-DELETE {{baseUrl}}/users/2
+DELETE {{baseUrl}}/users/3
