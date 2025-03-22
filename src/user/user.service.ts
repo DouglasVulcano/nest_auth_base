@@ -1,14 +1,14 @@
 import {
-  ConflictException,
   Injectable,
+  ConflictException,
   NotFoundException,
 } from '@nestjs/common';
+import { HashingService } from 'src/auth/hashing/hashing.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
-import { HashingService } from 'src/auth/hashing/hashing.service';
 
 @Injectable()
 export class UserService {
@@ -26,10 +26,11 @@ export class UserService {
     if (existingUser) throw new ConflictException('Email already exists');
 
     const password = await this.hashingService.hash(createUserDto.password);
-    return this.userRepository.save({
+    await this.userRepository.save({
       ...createUserDto,
       password,
     });
+    return { message: 'User created successfully' };
   }
 
   async findAll() {
@@ -52,7 +53,6 @@ export class UserService {
     }
 
     const user = await query.getOne();
-
     if (!user) throw new NotFoundException('User not found');
 
     return user;
@@ -77,14 +77,14 @@ export class UserService {
     });
 
     if (!updatedUser) throw new NotFoundException('User not found');
-    await this.userRepository.save(updatedUser);
 
+    await this.userRepository.save(updatedUser);
     return await this.findOne(id);
   }
 
   async remove(id: number) {
     const user = await this.findOne(id);
-    await this.userRepository.softDelete(user);
+    await this.userRepository.softRemove(user);
     return user;
   }
 }

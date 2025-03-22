@@ -1,12 +1,12 @@
 @baseUrl = http://localhost:3000
+@Bearer = Bearer {{authentication.response.body.accessToken}}
 
 ######## USUÁRIOS
 
-### Obter todos os usuários
-GET {{baseUrl}}/users
-
-### Obter um usuário por ID
-GET {{baseUrl}}/users/3
+### Obter um usuário (me)
+GET {{baseUrl}}/users/me
+Content-Type: application/json
+Authorization: {{Bearer}}
 
 ### Criar um novo usuário
 POST {{baseUrl}}/users
@@ -14,27 +14,30 @@ Content-Type: application/json
 
 {
     "name": "John Doe Silva",
-    "email": "john.doe2@example.com",
+    "email": "john.doe9@example.com",
     "password": "securepassword"
 }
 
 ### Atualizar um usuário por ID
 PATCH {{baseUrl}}/users/3
 Content-Type: application/json
+Authorization: {{Bearer}}
 
 {
-    "name": "John Update",
-    "password": "john.updated2@example.com"
+    "name": "John Eldia",
+    "password": "securepassword"
 }
 
 ### Deletar um usuário por ID
-DELETE {{baseUrl}}/users/3
+DELETE {{baseUrl}}/users
+Authorization: {{Bearer}}
 
 ######## Login
+# @name authentication
 POST {{baseUrl}}/auth
 Content-Type: application/json
 
 {
-    "email": "john.doe@example.com",
-    "password": "john.updated2@example.com"
+    "email": "john.doe2@example.com",
+    "password": "securepassword"
 }
