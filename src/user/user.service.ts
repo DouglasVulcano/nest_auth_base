@@ -42,6 +42,22 @@ export class UserService {
     return user;
   }
 
+  async findByEmail(email: string, withPassword = false) {
+    const query = this.userRepository
+      .createQueryBuilder('user')
+      .where('user.email = :email', { email });
+
+    if (withPassword) {
+      query.addSelect('user.password');
+    }
+
+    const user = await query.getOne();
+
+    if (!user) throw new NotFoundException('User not found');
+
+    return user;
+  }
+
   async update(id: number, updateUserDto: UpdateUserDto) {
     const user = await this.findOne(id);
 

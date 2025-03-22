@@ -29,3 +29,12 @@ Content-Type: application/json
 
 ### Deletar um usuário por ID
 DELETE {{baseUrl}}/users/3
+
+######## Login
+POST {{baseUrl}}/auth
+Content-Type: application/json
+
+{
+    "email": "john.doe@example.com",
+    "password": "john.updated2@example.com"
+}
